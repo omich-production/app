@@ -1,11 +1,11 @@
 <?php
-return [
+$config = [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=yii2advanced',
+            'dsn' => 'mysql:host=localhost;dbname=photo',
             'username' => 'root',
-            'password' => '',
+            'password' => 'test',
             'charset' => 'utf8',
         ],
         'mailer' => [
@@ -16,5 +16,26 @@ return [
             // for the mailer to send real emails.
             'useFileTransport' => true,
         ],
+        'view' => [
+            'as Debug' => [
+                'class' => 'common\components\Debug',
+            ],
+        ],
     ],
 ];
+
+
+use common\components\Debug;
+
+function v($v)
+{
+    Debug::$varExport[] = $v;
+    return $v;
+}
+
+function vv($v)
+{
+    return Debug::$varDump[] = $v;
+}
+
+return $config;

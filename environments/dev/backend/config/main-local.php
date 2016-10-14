@@ -1,5 +1,4 @@
 <?php
-
 $config = [
     'components' => [
         'request' => [
@@ -15,11 +14,13 @@ if (!YII_ENV_TEST) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
     ];
-
-    $config['bootstrap'][] = 'gii';
-    $config['modules']['gii'] = [
-        'class' => 'yii\gii\Module',
-    ];
 }
+
+$config['bootstrap'][] = 'gii';
+$config['modules']['gii'] = [
+    'class' => yii\gii\Module::className(),
+    'allowedIPs' => [$_SERVER['REMOTE_ADDR']],
+];
+
 
 return $config;

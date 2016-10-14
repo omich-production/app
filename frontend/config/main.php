@@ -1,13 +1,17 @@
 <?php
-$params = array_merge(
+$params = call_user_func_array('array_merge', [
     require(__DIR__ . '/../../common/config/params.php'),
     require(__DIR__ . '/../../common/config/params-local.php'),
     require(__DIR__ . '/params.php'),
-    require(__DIR__ . '/params-local.php')
-);
+    require(__DIR__ . '/params-local.php'),
+]);
 
 return [
+    'class' => 'frontend\components\Application',
     'id' => 'app-frontend',
+    'name' => 'Photo frontend',
+    'sourceLanguage' => 'en-US',
+    'language' => 'ru-RU',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
@@ -27,7 +31,7 @@ return [
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
-                [
+                    [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
                 ],
@@ -36,14 +40,23 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
         'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
+            'class' => 'common\components\FrontendUrlManager',
+        ],
+        'i18n' => [
+            'translations' => [
+                'app*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'sourceLanguage' => 'en-US',
+                    'basePath' => '@app/messages',
+                    'forceTranslation' => true,
+                ],
             ],
         ],
-        */
+        'assetManager' => [
+            'bundles' => [
+            ],
+        ],
     ],
     'params' => $params,
 ];
